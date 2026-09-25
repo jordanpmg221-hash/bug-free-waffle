@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -438,6 +437,42 @@
       border: 1px solid var(--card-border);
     }
 
+    .chapter-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .chapter-title {
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      margin-bottom: 8px;
+    }
+
+    .mission-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.8rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mission-item:last-child {
+      border-bottom: none;
+    }
+
     #radarChart {
       max-height: 280px;
       margin: 0 auto;
@@ -458,7 +493,7 @@
       <div class="program-progress-bar" id="program-bar"></div>
     </div>
     <div class="program-dates">
-      <span>01 SEPT 2026</span>
+      <span>25 SEPT 2026</span>
       <span id="program-percent">0%</span>
       <span>31 MARS 2027</span>
     </div>
@@ -528,7 +563,7 @@
       </div>
     </div>
 
-    <!-- PAGE 2: BILAN HEBDOMADAIRE (NOUVEAU) -->
+    <!-- PAGE 2: BILAN HEBDOMADAIRE -->
     <div id="page-weekly" class="page-section">
       <div class="card">
         <div class="card-title">
@@ -540,7 +575,7 @@
         <input type="number" id="weekly-expenses" placeholder="ex: 25000" oninput="saveWeeklyData()">
 
         <label for="weekly-wins">2. Victoires & Réalisations Clés (*Wins*)</label>
-        <textarea id="weekly-wins" placeholder="Ex: 5 vidéos publiées, 100% de présence au Fajr, 14h d'études L3..." oninput="saveWeeklyData()"></textarea>
+        <textarea id="weekly-wins" placeholder="Ex: 5 vidéos publiées, 100% au Fajr, 14h d'études L3..." oninput="saveWeeklyData()"></textarea>
 
         <label for="weekly-lessons">3. Leçons & Distractions à Éliminer</label>
         <textarea id="weekly-lessons" placeholder="Ex: Procrastination le mardi soir sur le téléphone, fatigue..." oninput="saveWeeklyData()"></textarea>
@@ -572,7 +607,7 @@
         
         <div class="chapter-card">
           <div class="chapter-title">CHAPTER 01 — SEPTEMBER</div>
-          <div class="chapter-subtitle">Foundation & Anchor</div>
+          <div class="chapter-subtitle">Foundation & Anchor (From Sept 25)</div>
           <p style="font-size:0.75rem; color:var(--text-muted);">Mise en place du rythme d'études L3 et ancrage spirituel.</p>
         </div>
 
@@ -701,7 +736,7 @@
       const now = new Date();
       document.getElementById('clock').innerText = now.toLocaleTimeString('fr-FR');
 
-      const startDate = new Date('2026-09-01T00:00:00');
+      const startDate = new Date('2026-09-25T00:00:00');
       const endDate = new Date('2027-03-31T23:59:59');
       
       let pct = 0;
