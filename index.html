@@ -1045,3 +1045,9 @@
   </script>
 </body>
 </html>
+const BADGES_TEMPLATE = [
+  { id: 'fajr_7', title: 'Fajr Warrior', desc: '7 jours de Fajr d\'affilée', icon: '🕌', check: (data) => checkConsecutiveTask('deen_fajr', 7) },
+  { id: 'l3_10h', title: 'Finance Master', desc: '10 sessions de L3 Finance', icon: '📈', check: (data) => countTaskTotal('life_studies') >= 10 },
+  { id: 'matrise_10', title: 'Self-Control King', desc: '10 jours de Maîtrise de soi', icon: '🛡️', check: (data) => countTaskTotal('char_matrise') >= 10 },
+  { id: 'streak_14', title: 'Streak Master', desc: '14 jours de série consécutifs', icon: '⚡', check: (data) => getStreak() >= 14 }
+];
