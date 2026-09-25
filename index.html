@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -29,12 +28,7 @@
       --radius-sm: 8px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
       background-color: var(--bg-color);
@@ -56,12 +50,7 @@
       backdrop-filter: blur(10px);
     }
 
-    .header-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 8px;
-    }
+    .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
 
     .brand-title {
       font-family: 'Cinzel', serif;
@@ -78,7 +67,7 @@
       letter-spacing: 1.5px;
       color: var(--gold-light);
       opacity: 0.8;
-      margin-bottom: 12px;
+      margin-bottom: 8px;
       font-weight: 600;
     }
 
@@ -108,27 +97,14 @@
       transition: width 0.5s ease;
     }
 
-    .program-dates {
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.7rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+    .program-dates { display: flex; justify-content: space-between; font-size: 0.7rem; color: var(--text-muted); margin-top: 4px; }
 
-    /* CONTAINER */
-    .container {
-      padding: 16px;
-      max-width: 600px;
-      margin: 0 auto;
-    }
+    .container { padding: 16px; max-width: 600px; margin: 0 auto; }
 
     /* NAVIGATION BOTTOM */
     .bottom-nav {
       position: fixed;
-      bottom: 0;
-      left: 0;
-      right: 0;
+      bottom: 0; left: 0; right: 0;
       background: #12141a;
       border-top: 1px solid var(--card-border);
       display: flex;
@@ -138,36 +114,21 @@
     }
 
     .nav-btn {
-      background: none;
-      border: none;
+      background: none; border: none;
       color: var(--text-muted);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      font-size: 0.58rem;
-      font-weight: 600;
-      cursor: pointer;
-      width: 14%;
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      font-size: 0.58rem; font-weight: 600; cursor: pointer; width: 14%;
     }
 
-    .nav-btn.active {
-      color: var(--gold-primary);
-    }
-
-    .nav-btn svg {
-      width: 18px;
-      height: 18px;
-      fill: currentColor;
-    }
+    .nav-btn.active { color: var(--gold-primary); }
+    .nav-btn svg { width: 18px; height: 18px; fill: currentColor; }
 
     /* CARDS */
     .card {
       background-color: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-lg);
-      padding: 16px;
-      margin-bottom: 16px;
+      padding: 16px; margin-bottom: 16px;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     }
 
@@ -178,349 +139,112 @@
       color: var(--gold-primary);
       margin-bottom: 12px;
       font-weight: 700;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+
+    /* CITATION CARD */
+    .quote-box {
+      background: rgba(212, 175, 55, 0.05);
+      border-left: 3px solid var(--gold-primary);
+      padding: 10px 12px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-style: italic;
+      font-size: 0.8rem;
+      color: var(--gold-light);
+      margin-bottom: 16px;
     }
 
     /* SCORE DASHBOARD */
-    .score-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-      text-align: center;
+    .score-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; text-align: center; }
+    .score-box { background: rgba(255, 255, 255, 0.03); padding: 10px 6px; border-radius: var(--radius-md); border: 1px solid var(--card-border); }
+    .score-value { font-size: 1.1rem; font-weight: 800; color: var(--gold-light); }
+    .score-label { font-size: 0.62rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px; }
+
+    /* TIMER CARD & DEEP WORK MODE */
+    .timer-display { font-size: 2rem; font-weight: 800; color: var(--gold-primary); text-align: center; margin: 10px 0; font-family: monospace; }
+    .timer-controls { display: flex; gap: 8px; }
+
+    .deep-work-overlay {
+      display: none;
+      position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: #0b0c10; z-index: 2000;
+      flex-direction: column; justify-content: center; align-items: center;
+      padding: 24px; text-align: center;
     }
 
-    .score-box {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 10px 6px;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--card-border);
-    }
-
-    .score-value {
-      font-size: 1.1rem;
-      font-weight: 800;
-      color: var(--gold-light);
-    }
-
-    .score-label {
-      font-size: 0.62rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-
-    /* TIMER CARD */
-    .timer-display {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--gold-primary);
-      text-align: center;
-      margin: 10px 0;
-      font-family: monospace;
-    }
-
-    .timer-controls {
-      display: flex;
-      gap: 8px;
-    }
+    .deep-work-overlay.active { display: flex; }
 
     /* DATE NAVIGATOR */
     .date-navigator {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 8px 12px;
-      margin-bottom: 16px;
+      display: flex; justify-content: space-between; align-items: center;
+      background: var(--card-bg); border: 1px solid var(--card-border);
+      border-radius: var(--radius-md); padding: 8px 12px; margin-bottom: 16px;
     }
 
-    .date-nav-btn {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      border-radius: var(--radius-sm);
-      padding: 6px 12px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .current-date-display {
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--gold-primary);
-    }
+    .date-nav-btn { background: rgba(255, 255, 255, 0.05); border: 1px solid var(--card-border); color: var(--text-main); border-radius: var(--radius-sm); padding: 6px 12px; font-weight: bold; cursor: pointer; }
+    .current-date-display { font-size: 0.9rem; font-weight: 700; color: var(--gold-primary); }
 
     /* FILTER TABS */
-    .filter-tabs {
-      display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
-    .tab-btn {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 600;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    .tab-btn.active {
-      background: var(--gold-glow);
-      border-color: var(--gold-primary);
-      color: var(--gold-primary);
-    }
+    .filter-tabs { display: flex; gap: 8px; margin-bottom: 16px; overflow-x: auto; padding-bottom: 4px; }
+    .tab-btn { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--card-border); color: var(--text-muted); padding: 6px 14px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .tab-btn.active { background: var(--gold-glow); border-color: var(--gold-primary); color: var(--gold-primary); }
 
     /* CHECKLIST ITEMS */
-    .pillar-header {
-      font-size: 0.8rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      padding: 8px 0 4px 0;
-      margin-top: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    .pillar-header { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 8px 0 4px 0; margin-top: 12px; display: flex; align-items: center; gap: 8px; }
     .pillar-deen { color: var(--deen-color); border-bottom: 1px solid rgba(212, 175, 55, 0.2); }
     .pillar-character { color: var(--character-color); border-bottom: 1px solid rgba(74, 144, 226, 0.2); }
     .pillar-life { color: var(--life-color); border-bottom: 1px solid rgba(46, 204, 113, 0.2); }
 
-    .task-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 12px 14px;
-      margin-top: 8px;
-      transition: all 0.2s ease;
-    }
-
-    .task-item.completed {
-      background: rgba(212, 175, 55, 0.05);
-      border-color: rgba(212, 175, 55, 0.3);
-    }
-
-    .task-left {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      flex: 1;
-    }
-
-    .custom-checkbox {
-      width: 24px;
-      height: 24px;
-      border-radius: 6px;
-      border: 2px solid var(--card-border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-      flex-shrink: 0;
-    }
-
-    .task-item.completed .custom-checkbox {
-      background: var(--gold-primary);
-      border-color: var(--gold-primary);
-    }
-
-    .custom-checkbox::after {
-      content: '✓';
-      color: #0b0c10;
-      font-weight: 900;
-      font-size: 14px;
-      display: none;
-    }
-
-    .task-item.completed .custom-checkbox::after {
-      display: block;
-    }
-
-    .task-content {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .task-title {
-      font-size: 0.85rem;
-      font-weight: 600;
-      color: var(--text-main);
-    }
-
-    .task-item.completed .task-title {
-      text-decoration: line-through;
-      color: var(--text-muted);
-    }
-
-    .task-badge {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-
-    .tag-must {
-      color: #e74c3c;
-      font-weight: 700;
-    }
+    .task-item { display: flex; align-items: center; justify-content: space-between; background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px 14px; margin-top: 8px; transition: all 0.2s ease; }
+    .task-item.completed { background: rgba(212, 175, 55, 0.05); border-color: rgba(212, 175, 55, 0.3); }
+    .task-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+    .custom-checkbox { width: 24px; height: 24px; border-radius: 6px; border: 2px solid var(--card-border); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: all 0.2s; flex-shrink: 0; }
+    .task-item.completed .custom-checkbox { background: var(--gold-primary); border-color: var(--gold-primary); }
+    .custom-checkbox::after { content: '✓'; color: #0b0c10; font-weight: 900; font-size: 14px; display: none; }
+    .task-item.completed .custom-checkbox::after { display: block; }
+    .task-content { display: flex; flex-direction: column; }
+    .task-title { font-size: 0.85rem; font-weight: 600; color: var(--text-main); }
+    .task-item.completed .task-title { text-decoration: line-through; color: var(--text-muted); }
+    .task-badge { font-size: 0.65rem; color: var(--text-muted); text-transform: uppercase; margin-top: 2px; }
+    .tag-must { color: #e74c3c; font-weight: 700; }
 
     /* FORMS & TEXTAREA */
     textarea, input[type="text"], input[type="number"], select {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      color: var(--text-main);
-      padding: 10px;
-      font-family: inherit;
-      font-size: 0.85rem;
-      margin-top: 6px;
-      margin-bottom: 12px;
+      width: 100%; background: rgba(255, 255, 255, 0.03); border: 1px solid var(--card-border); border-radius: var(--radius-md);
+      color: var(--text-main); padding: 10px; font-family: inherit; font-size: 0.85rem; margin-top: 6px; margin-bottom: 12px;
     }
-
-    textarea {
-      height: 70px;
-      resize: none;
-    }
-
-    textarea:focus, input:focus, select:focus {
-      outline: none;
-      border-color: var(--gold-primary);
-    }
-
-    label {
-      font-size: 0.75rem;
-      color: var(--gold-light);
-      font-weight: 600;
-      text-transform: uppercase;
-    }
+    textarea { height: 70px; resize: none; }
+    textarea:focus, input:focus, select:focus { outline: none; border-color: var(--gold-primary); }
+    label { font-size: 0.75rem; color: var(--gold-light); font-weight: 600; text-transform: uppercase; }
 
     /* BADGES GRID */
-    .badges-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-    }
+    .badges-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .badge-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; text-align: center; opacity: 0.4; filter: grayscale(1); transition: all 0.3s ease; }
+    .badge-card.unlocked { opacity: 1; filter: grayscale(0); border-color: var(--gold-primary); background: var(--gold-glow); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+    .badge-icon { font-size: 2rem; margin-bottom: 6px; }
+    .badge-title { font-size: 0.8rem; font-weight: 800; color: var(--gold-light); }
+    .badge-desc { font-size: 0.65rem; color: var(--text-muted); margin-top: 4px; }
 
-    .badge-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 12px;
-      text-align: center;
-      opacity: 0.4;
-      filter: grayscale(1);
-      transition: all 0.3s ease;
-    }
+    /* BOOK TRACKER */
+    .book-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 12px; margin-bottom: 10px; }
+    .book-title { font-size: 0.85rem; font-weight: 700; color: var(--gold-light); }
+    .book-progress { width: 100%; height: 6px; background: rgba(255, 255, 255, 0.08); border-radius: 10px; margin-top: 8px; overflow: hidden; }
+    .book-progress-fill { height: 100%; background: var(--gold-primary); width: 0%; transition: width 0.3s ease; }
 
-    .badge-card.unlocked {
-      opacity: 1;
-      filter: grayscale(0);
-      border-color: var(--gold-primary);
-      background: var(--gold-glow);
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
-    }
+    .page-section { display: none; }
+    .page-section.active { display: block; }
 
-    .badge-icon {
-      font-size: 2rem;
-      margin-bottom: 6px;
-    }
+    .btn { width: 100%; background: var(--gold-primary); color: #0b0c10; border: none; border-radius: var(--radius-md); padding: 10px; font-weight: 700; font-size: 0.85rem; cursor: pointer; margin-top: 10px; }
+    .btn-secondary { background: rgba(255, 255, 255, 0.08); color: var(--text-main); border: 1px solid var(--card-border); }
 
-    .badge-title {
-      font-size: 0.8rem;
-      font-weight: 800;
-      color: var(--gold-light);
-    }
+    .chapter-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--card-border); border-radius: var(--radius-md); padding: 14px; margin-bottom: 12px; }
+    .chapter-title { font-weight: 800; font-size: 0.85rem; color: var(--gold-primary); text-transform: uppercase; letter-spacing: 0.5px; }
+    .chapter-subtitle { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; margin-bottom: 8px; }
 
-    .badge-desc {
-      font-size: 0.65rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
+    .mission-item { display: flex; align-items: flex-start; gap: 10px; font-size: 0.8rem; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); }
+    .mission-item:last-child { border-bottom: none; }
 
-    .page-section {
-      display: none;
-    }
-
-    .page-section.active {
-      display: block;
-    }
-
-    .btn {
-      width: 100%;
-      background: var(--gold-primary);
-      color: #0b0c10;
-      border: none;
-      border-radius: var(--radius-md);
-      padding: 10px;
-      font-weight: 700;
-      font-size: 0.85rem;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.08);
-      color: var(--text-main);
-      border: 1px solid var(--card-border);
-    }
-
-    .chapter-card {
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius-md);
-      padding: 14px;
-      margin-bottom: 12px;
-    }
-
-    .chapter-title {
-      font-weight: 800;
-      font-size: 0.85rem;
-      color: var(--gold-primary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .chapter-subtitle {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-      margin-bottom: 8px;
-    }
-
-    .mission-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.8rem;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .mission-item:last-child {
-      border-bottom: none;
-    }
-
-    #radarChart {
-      max-height: 280px;
-      margin: 0 auto;
-    }
+    #radarChart { max-height: 280px; margin: 0 auto; }
   </style>
 </head>
 <body>
@@ -543,11 +267,27 @@
     </div>
   </header>
 
+  <!-- OVERLAY DEEP WORK MODE -->
+  <div class="deep-work-overlay" id="deep-work-overlay">
+    <div style="font-size: 0.9rem; text-transform: uppercase; color: var(--gold-primary); letter-spacing: 2px;">Session de Focus Absolu</div>
+    <div class="timer-display" id="deep-work-timer" style="font-size: 4rem; margin: 20px 0;">02:00:00</div>
+    <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 300px; margin-bottom: 24px;">
+      "Celui qui maîtrise son esprit maîtrise son destin. Put Allah First."
+    </p>
+    <button class="btn btn-secondary" style="width: auto; padding: 10px 24px;" onclick="exitDeepWork()">Quitter le Mode Focus</button>
+  </div>
+
   <!-- MAIN CONTAINER -->
   <div class="container">
 
     <!-- PAGE 1: TODAY -->
     <div id="page-today" class="page-section active">
+      
+      <!-- CITATION QUOTIDIENNE -->
+      <div class="quote-box" id="daily-quote">
+        "Cherche l'aide d'Allah et ne faiblis pas." — Prophète Muhammad (ﷺ)
+      </div>
+
       <div class="card">
         <div class="card-title">
           <span>Tableau de Bord</span>
@@ -573,7 +313,7 @@
         </div>
       </div>
 
-      <!-- TIMER POMODORO -->
+      <!-- TIMER POMODORO & DEEP WORK -->
       <div class="card">
         <div class="card-title">Minuteur de Concentration</div>
         <div class="timer-display" id="timer-display">02:00:00</div>
@@ -584,10 +324,26 @@
         </div>
       </div>
 
+      <!-- TRACKER RAPIDE DE DÉPENSES -->
+      <div class="card">
+        <div class="card-title">Dépense Rapide du Jour</div>
+        <div style="display: flex; gap: 8px;">
+          <input type="number" id="quick-expense-amount" placeholder="Montant (FCFA / €)" style="margin:0;">
+          <button class="btn" style="width: auto; margin:0; padding: 0 16px;" onclick="addQuickExpense()">+ Ajouter</button>
+        </div>
+        <div id="daily-expenses-total" style="font-size: 0.75rem; color: var(--gold-light); margin-top: 8px; font-weight: 600;">Total aujourd'hui: 0 FCFA</div>
+      </div>
+
       <div class="date-navigator">
         <button class="date-nav-btn" onclick="changeDate(-1)">◄</button>
         <span class="current-date-display" id="date-display">Aujourd'hui</span>
         <button class="date-nav-btn" onclick="changeDate(1)">►</button>
+      </div>
+
+      <!-- COMMUTATEUR RAMADAN PEAK MODE -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: rgba(212, 175, 55, 0.08); padding: 8px 12px; border-radius: var(--radius-md); border: 1px solid var(--card-border); margin-bottom: 12px;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--gold-primary);">🌙 Mode Ramadan Peak</span>
+        <input type="checkbox" id="ramadan-mode-toggle" onchange="toggleRamadanMode(this.checked)" style="width: auto; margin: 0;">
       </div>
 
       <div class="filter-tabs">
@@ -636,7 +392,7 @@
       </div>
     </div>
 
-    <!-- PAGE 3: BADGES & TROPHÉES (NOUVEAU) -->
+    <!-- PAGE 3: BADGES & TROPHÉES -->
     <div id="page-badges" class="page-section">
       <div class="card">
         <div class="card-title">TROPHÉES & BADGES</div>
@@ -701,17 +457,33 @@
       </div>
     </div>
 
-    <!-- PAGE 6: BIG MISSIONS -->
+    <!-- PAGE 6: BIG MISSIONS & BIBLIOTHÈQUE -->
     <div id="page-missions" class="page-section">
       <div class="card">
         <div class="card-title">THE BIG MISSIONS</div>
-        
         <div class="mission-item"><span style="color:var(--gold-primary);">1.</span><div><strong>DEEN FIRST :</strong> Assiduité totale au Fajr à la mosquée et mémorisation/révision du Coran.</div></div>
         <div class="mission-item"><span style="color:var(--gold-primary);">2.</span><div><strong>L3 FINANCE :</strong> Valider l'année universitaire de Licence 3 avec Mention.</div></div>
         <div class="mission-item"><span style="color:var(--gold-primary);">3.</span><div><strong>YOUTUBE FACELESS :</strong> Atteindre les seuils de monétisation (1 000 subs / 4 000 h).</div></div>
         <div class="mission-item"><span style="color:var(--gold-primary);">4.</span><div><strong>ENGLISH FLUENCY :</strong> Parler anglais couramment grâce aux 15 min de pratique GPT quotidienne.</div></div>
         <div class="mission-item"><span style="color:var(--gold-primary);">5.</span><div><strong>DISCIPLINE :</strong> Éliminer la procrastination initiale au lancement des blocs de travail.</div></div>
         <div class="mission-item"><span style="color:var(--gold-primary);">6.</span><div><strong>MAÎTRISE FINANCIÈRE :</strong> Suivi strict des dépenses et constitution d'une épargne.</div></div>
+      </div>
+
+      <!-- SUIVI DE LECTURE & BIBLIOTHÈQUE -->
+      <div class="card">
+        <div class="card-title">Suivi de Lecture L3 / Deen</div>
+        
+        <div class="book-item">
+          <div class="book-title">L3 Finance — Analyse Financière & Évaluation</div>
+          <div style="font-size: 0.7rem; color: var(--text-muted); margin-top:2px;">Progression : 45%</div>
+          <div class="book-progress"><div class="book-progress-fill" style="width: 45%;"></div></div>
+        </div>
+
+        <div class="book-item">
+          <div class="book-title">Développement Personnel — Atomic Habits</div>
+          <div style="font-size: 0.7rem; color: var(--text-muted); margin-top:2px;">Progression : 80%</div>
+          <div class="book-progress"><div class="book-progress-fill" style="width: 80%;"></div></div>
+        </div>
       </div>
     </div>
 
@@ -754,12 +526,20 @@
       Missions
     </button>
     <button class="nav-btn" onclick="switchPage('settings', this)">
-      <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
       Réglages
     </button>
   </nav>
 
   <script>
+    const QUOTES = [
+      '"Cherche l\'aide d\'Allah et ne faiblis pas." — Prophète Muhammad (ﷺ)',
+      '"La discipline est le pont entre les objectifs et les accomplissements."',
+      '"Invoque Allah avec la certitude d\'être exaucé."',
+      '"L\'excellence n\'est pas un acte, c\'est une habitude."',
+      '"Le meilleur travail est celui qui est régulier, même s\'il est peu."'
+    ];
+
     const TASKS_TEMPLATE = [
       { id: 'deen_fajr', pillar: 'DEEN', category: 'DEEN', title: 'Fajr à la mosquée à l\'heure', tag: 'MUST DO' },
       { id: 'deen_istighfar', pillar: 'DEEN', category: 'DEEN', title: '1 000 Istighfar quotidien', tag: 'MUST DO' },
@@ -769,7 +549,7 @@
       { id: 'deen_sunnah', pillar: 'DEEN', category: 'DEEN', title: 'Prières surérogatoires (Sunnah)', tag: 'SHOULD DO' },
 
       { id: 'char_matrise', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Maîtrise de soi', tag: 'MUST DO' },
-      { id: 'char_gratitude', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Pratiquer la gratitude', tag: 'MUST DO' },
+      { id: 'char_lecture', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Lecture (Développement personnel / Savoir)', tag: 'MUST DO' },
       { id: 'char_focus', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Lancement immédiat du travail sans distraction', tag: 'MUST DO' },
       { id: 'char_bilan', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Bilan du soir de 3 minutes', tag: 'SHOULD DO' },
 
@@ -794,6 +574,8 @@
     let appData = JSON.parse(localStorage.getItem('PMG_LEVELING_DATA')) || {};
     let notesData = JSON.parse(localStorage.getItem('PMG_LEVELING_NOTES')) || {};
     let weeklyData = JSON.parse(localStorage.getItem('PMG_LEVELING_WEEKLY')) || {};
+    let expensesData = JSON.parse(localStorage.getItem('PMG_LEVELING_EXPENSES')) || {};
+    let isRamadanMode = JSON.parse(localStorage.getItem('PMG_RAMADAN_MODE')) || false;
     let radarChartInstance = null;
     let timerInterval = null;
 
@@ -894,6 +676,25 @@
       document.getElementById('weekly-rating').value = wData.rating || '10';
     }
 
+    function addQuickExpense() {
+      const amountInput = document.getElementById('quick-expense-amount');
+      const val = parseFloat(amountInput.value);
+      if (isNaN(val) || val <= 0) return;
+
+      const dateKey = getDateKey(currentDate);
+      expensesData[dateKey] = (expensesData[dateKey] || 0) + val;
+      localStorage.setItem('PMG_LEVELING_EXPENSES', JSON.stringify(expensesData));
+      
+      amountInput.value = '';
+      renderChecklist();
+    }
+
+    function toggleRamadanMode(enabled) {
+      isRamadanMode = enabled;
+      localStorage.setItem('PMG_RAMADAN_MODE', JSON.stringify(isRamadanMode));
+      renderChecklist();
+    }
+
     function countTaskOccurrences(taskId) {
       let count = 0;
       Object.values(appData).forEach(day => {
@@ -948,6 +749,17 @@
       document.getElementById('date-display').innerText = formatDateDisplay(currentDate);
       document.getElementById('daily-note').value = notesData[dateKey] || '';
 
+      // Citation aléatoire selon la date
+      const qIdx = Math.abs(dateKey.split('').reduce((a,b)=>a+b.charCodeAt(0),0)) % QUOTES.length;
+      document.getElementById('daily-quote').innerText = QUOTES[qIdx];
+
+      // Total dépenses jour
+      const dayExp = expensesData[dateKey] || 0;
+      document.getElementById('daily-expenses-total').innerText = `Total aujourd'hui: ${dayExp} FCFA`;
+
+      // État Ramadan Mode toggle
+      document.getElementById('ramadan-mode-toggle').checked = isRamadanMode;
+
       const container = document.getElementById('checklist-container');
       container.innerHTML = '';
 
@@ -967,7 +779,7 @@
         if (tasksInPillar.length > 0) {
           const header = document.createElement('div');
           header.className = `pillar-header pillar-${pillar.toLowerCase()}`;
-          header.innerText = pillar;
+          header.innerText = pillar + (isRamadanMode && pillar === 'DEEN' ? ' (RAMADAN PEAK 🌙)' : '');
           container.appendChild(header);
 
           tasksInPillar.forEach(task => {
@@ -1021,17 +833,22 @@
       clearInterval(timerInterval);
       let seconds = minutes * 60;
       const display = document.getElementById('timer-display');
+      const deepDisplay = document.getElementById('deep-work-timer');
+
+      document.getElementById('deep-work-overlay').classList.add('active');
 
       timerInterval = setInterval(() => {
         let hrs = Math.floor(seconds / 3600);
         let mins = Math.floor((seconds % 3600) / 60);
         let secs = seconds % 60;
 
-        display.innerText = 
-          `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        const formatTime = `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        display.innerText = formatTime;
+        deepDisplay.innerText = formatTime;
 
         if (--seconds < 0) {
           clearInterval(timerInterval);
+          exitDeepWork();
           alert("Temps écoulé ! Session de travail terminée.");
         }
       }, 1000);
@@ -1040,6 +857,10 @@
     function resetTimer() {
       clearInterval(timerInterval);
       document.getElementById('timer-display').innerText = "02:00:00";
+    }
+
+    function exitDeepWork() {
+      document.getElementById('deep-work-overlay').classList.remove('active');
     }
 
     function getCategoryCompletion(cat) {
@@ -1096,9 +917,7 @@
               suggestedMax: 100
             }
           },
-          plugins: {
-            legend: { display: false }
-          }
+          plugins: { legend: { display: false } }
         }
       });
     }
@@ -1107,7 +926,9 @@
       const exportObject = {
         appData: appData,
         notesData: notesData,
-        weeklyData: weeklyData
+        weeklyData: weeklyData,
+        expensesData: expensesData,
+        isRamadanMode: isRamadanMode
       };
       const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObject));
       const downloadAnchor = document.createElement('a');
@@ -1127,12 +948,16 @@
             appData = imported.appData;
             notesData = imported.notesData || {};
             weeklyData = imported.weeklyData || {};
+            expensesData = imported.expensesData || {};
+            isRamadanMode = imported.isRamadanMode || false;
           } else {
             appData = imported;
           }
           localStorage.setItem('PMG_LEVELING_DATA', JSON.stringify(appData));
           localStorage.setItem('PMG_LEVELING_NOTES', JSON.stringify(notesData));
           localStorage.setItem('PMG_LEVELING_WEEKLY', JSON.stringify(weeklyData));
+          localStorage.setItem('PMG_LEVELING_EXPENSES', JSON.stringify(expensesData));
+          localStorage.setItem('PMG_RAMADAN_MODE', JSON.stringify(isRamadanMode));
           renderChecklist();
           alert("Données importées avec succès !");
         } catch (err) {
