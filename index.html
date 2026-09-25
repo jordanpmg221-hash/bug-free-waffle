@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     :root {
       --bg-color: #0b0c10;
@@ -121,7 +122,7 @@
       margin: 0 auto;
     }
 
-    /* NAVIGATION BOTTOM (MOBILE FIRST) */
+    /* NAVIGATION BOTTOM */
     .bottom-nav {
       position: fixed;
       bottom: 0;
@@ -143,10 +144,10 @@
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 600;
       cursor: pointer;
-      width: 33%;
+      width: 20%;
     }
 
     .nav-btn.active {
@@ -154,8 +155,8 @@
     }
 
     .nav-btn svg {
-      width: 22px;
-      height: 22px;
+      width: 20px;
+      height: 20px;
       fill: currentColor;
     }
 
@@ -209,7 +210,7 @@
       margin-top: 2px;
     }
 
-    /* DATE PICKER BAR */
+    /* DATE NAVIGATOR */
     .date-navigator {
       display: flex;
       justify-content: space-between;
@@ -363,7 +364,43 @@
       font-weight: 700;
     }
 
-    /* PAGE SECTIONS */
+    /* CHAPTERS & MISSIONS */
+    .chapter-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      margin-bottom: 12px;
+    }
+
+    .chapter-title {
+      font-weight: 800;
+      font-size: 0.85rem;
+      color: var(--gold-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .chapter-subtitle {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      margin-bottom: 8px;
+    }
+
+    .mission-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-size: 0.8rem;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .mission-item:last-child {
+      border-bottom: none;
+    }
+
     .page-section {
       display: none;
     }
@@ -372,7 +409,6 @@
       display: block;
     }
 
-    /* SETTINGS / EXPORT */
     .btn {
       width: 100%;
       background: var(--gold-primary);
@@ -392,13 +428,17 @@
       border: 1px solid var(--card-border);
     }
 
-    /* HISTORY LIST */
     .history-item {
       display: flex;
       justify-content: space-between;
       padding: 10px;
       border-bottom: 1px solid var(--card-border);
       font-size: 0.85rem;
+    }
+
+    #radarChart {
+      max-height: 280px;
+      margin: 0 auto;
     }
   </style>
 </head>
@@ -427,8 +467,6 @@
 
     <!-- PAGE 1: TODAY (CHECKLIST & HOME) -->
     <div id="page-today" class="page-section active">
-
-      <!-- DASHBOARD SUMMARY -->
       <div class="card">
         <div class="card-title">
           <span>Aujourd'hui</span>
@@ -450,14 +488,12 @@
         </div>
       </div>
 
-      <!-- DATE NAVIGATOR -->
       <div class="date-navigator">
         <button class="date-nav-btn" onclick="changeDate(-1)">◄</button>
         <span class="current-date-display" id="date-display">Aujourd'hui</span>
         <button class="date-nav-btn" onclick="changeDate(1)">►</button>
       </div>
 
-      <!-- FILTER TABS -->
       <div class="filter-tabs">
         <button class="tab-btn active" onclick="filterCategory('ALL', this)">Tous</button>
         <button class="tab-btn" onclick="filterCategory('DEEN', this)">Deen</button>
@@ -467,26 +503,111 @@
         <button class="tab-btn" onclick="filterCategory('FITNESS', this)">Sport</button>
       </div>
 
-      <!-- CHECKLIST ITEMS CONTAINER -->
       <div id="checklist-container"></div>
-
     </div>
 
-    <!-- PAGE 2: PROGRESS & HISTORY -->
-    <div id="page-progress" class="page-section">
+    <!-- PAGE 2: RADAR & METRICS (PHASE 2) -->
+    <div id="page-radar" class="page-section">
       <div class="card">
-        <div class="card-title">Progression Globale</div>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">Historique des taux de complétion journaliers :</p>
-        <div id="history-container"></div>
+        <div class="card-title">PMG LEVELING RADAR</div>
+        <canvas id="radarChart"></canvas>
       </div>
     </div>
 
-    <!-- PAGE 3: SETTINGS & DATA -->
+    <!-- PAGE 3: CHAPTERS (PHASE 2) -->
+    <div id="page-chapters" class="page-section">
+      <div class="card">
+        <div class="card-title">CHAPITRES DU PROGRAMME</div>
+        
+        <div class="chapter-card">
+          <div class="chapter-title">CHAPTER 01 — SEPTEMBER</div>
+          <div class="chapter-subtitle">Foundation & Anchor</div>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Mise en place du rythme d'études L2 et ancrage spirituel.</p>
+        </div>
+
+        <div class="chapter-card">
+          <div class="chapter-title">CHAPTER 02 — OCTOBER</div>
+          <div class="chapter-subtitle">Deep Focus & Content Engine</div>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Consolidation du travail profond et création YouTube Faceless.</p>
+        </div>
+
+        <div class="chapter-card">
+          <div class="chapter-title">CHAPTER 03 — NOVEMBER</div>
+          <div class="chapter-subtitle">Mid-Term Peak & Consistency</div>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Préparation intensive des partiels de mi-semestre L2 Finance.</p>
+        </div>
+
+        <div class="chapter-card">
+          <div class="chapter-title">CHAPTER 04 — DECEMBER</div>
+          <div class="chapter-subtitle">Exam Mastery & Revenue Push</div>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Révisions de fin de semestre et accélération business.</p>
+        </div>
+
+        <div class="chapter-card">
+          <div class="chapter-title">CHAPTER 05 — JANUARY</div>
+          <div class="chapter-subtitle">Monetization & Second Wind</div>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Validation des partiels Semestre 1 et optimisation du contenu.</p>
+        </div>
+
+        <div class="chapter-card">
+          <div class="chapter-title">CHAPTER 06 — FEBRUARY</div>
+          <div class="chapter-subtitle">Scale & Physical Peak</div>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Montée en puissance physique, volubilité anglaise et finance.</p>
+        </div>
+
+        <div class="chapter-card" style="border-color: var(--gold-primary);">
+          <div class="chapter-title">CHAPTER 07 — MARCH (RAMADAN)</div>
+          <div class="chapter-subtitle">Spiritual Apex & Graduation</div>
+          <p style="font-size:0.75rem; color:var(--gold-light);">Adoration maximale, validation de la L2 avec Mention et Level Up final.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PAGE 4: BIG MISSIONS (PHASE 2) -->
+    <div id="page-missions" class="page-section">
+      <div class="card">
+        <div class="card-title">THE BIG MISSIONS</div>
+        
+        <div class="mission-item">
+          <span style="color:var(--gold-primary);">1.</span>
+          <div><strong>DEEN FIRST :</strong> Assiduité totale au Fajr à la mosquée et mémorisation/révision du Coran.</div>
+        </div>
+
+        <div class="mission-item">
+          <span style="color:var(--gold-primary);">2.</span>
+          <div><strong>L2 FINANCE :</strong> Valider l'année universitaire de Licence 2 avec Mention.</div>
+        </div>
+
+        <div class="mission-item">
+          <span style="color:var(--gold-primary);">3.</span>
+          <div><strong>YOUTUBE FACELESS :</strong> Atteindre les seuils de monétisation (1 000 subs / 4 000 h).</div>
+        </div>
+
+        <div class="mission-item">
+          <span style="color:var(--gold-primary);">4.</span>
+          <div><strong>ENGLISH FLUENCY :</strong> Parler anglais couramment grâce aux 15 min de pratique GPT quotidienne.</div>
+        </div>
+
+        <div class="mission-item">
+          <span style="color:var(--gold-primary);">5.</span>
+          <div><strong>DISCIPLINE :</strong> Éliminer la procrastination initiale au lancement des blocs de travail.</div>
+        </div>
+
+        <div class="mission-item">
+          <span style="color:var(--gold-primary);">6.</span>
+          <div><strong>MAÎTRISE FINANCIÈRE :</strong> Suivi strict des dépenses et constitution d'une épargne.</div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- PAGE 5: SETTINGS & DATA -->
     <div id="page-settings" class="page-section">
       <div class="card">
         <div class="card-title">Sauvegarde & Données</div>
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
-          Toutes tes données sont enregistrées localement dans ton navigateur. Tu peux exporter tes sauvegardes en fichier JSON.
+          Tes données restent enregistrées localement dans ton navigateur. Exporte une sauvegarde de sécurité à tout moment.
         </p>
         <button class="btn" onclick="exportData()">Exporter les données (JSON)</button>
         <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">Importer un fichier JSON</button>
@@ -499,12 +620,20 @@
   <!-- BOTTOM NAVIGATION BAR -->
   <nav class="bottom-nav">
     <button class="nav-btn active" onclick="switchPage('today', this)">
-      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM17 84l-1.41-1.41L11 12.17l-2.59-2.58L7 11l4 4 6-6z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM17 8.4l-1.41-1.41L11 12.17l-2.59-2.58L7 11l4 4 6-6z"/></svg>
       Today
     </button>
-    <button class="nav-btn" onclick="switchPage('progress', this)">
+    <button class="nav-btn" onclick="switchPage('radar', this)">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+      Radar
+    </button>
+    <button class="nav-btn" onclick="switchPage('chapters', this)">
+      <svg viewBox="0 0 24 24"><path d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4V6zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H8V4h12v12z"/></svg>
+      Chapitres
+    </button>
+    <button class="nav-btn" onclick="switchPage('missions', this)">
       <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-      Progrès
+      Missions
     </button>
     <button class="nav-btn" onclick="switchPage('settings', this)">
       <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
@@ -512,11 +641,8 @@
     </button>
   </nav>
 
-  <!-- SCRIPT JS -->
   <script>
-    // LISTE DES TÂCHES DU PROGRAMME PMG LEVELING
     const TASKS_TEMPLATE = [
-      // PILIER 1: DEEN
       { id: 'deen_fajr', pillar: 'DEEN', category: 'DEEN', title: 'Fajr à la mosquée à l\'heure', tag: 'MUST DO' },
       { id: 'deen_istighfar', pillar: 'DEEN', category: 'DEEN', title: '1 000 Istighfar quotidien', tag: 'MUST DO' },
       { id: 'deen_coran', pillar: 'DEEN', category: 'DEEN', title: 'Coran : 3-5 versets mémorisés / révision', tag: 'MUST DO' },
@@ -524,12 +650,10 @@
       { id: 'deen_adhkar', pillar: 'DEEN', category: 'DEEN', title: 'Adhkar du matin & du soir', tag: 'SHOULD DO' },
       { id: 'deen_sunnah', pillar: 'DEEN', category: 'DEEN', title: 'Prières surérogatoires (Sunnah)', tag: 'SHOULD DO' },
 
-      // PILIER 2: CHARACTER
       { id: 'char_gratitude', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Pratiquer la gratitude', tag: 'MUST DO' },
       { id: 'char_focus', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Lancement immédiat du travail sans distraction', tag: 'MUST DO' },
       { id: 'char_bilan', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Bilan du soir de 3 minutes', tag: 'SHOULD DO' },
 
-      // PILIER 3: LIFE / STUDIES / BUSINESS / FITNESS / ENGLISH
       { id: 'life_studies', pillar: 'LIFE', category: 'STUDIES', title: '2h de travail profond L2 Finance (Active recall / ex)', tag: 'MUST DO' },
       { id: 'life_english', pillar: 'LIFE', category: 'ENGLISH', title: '15 min de conversation anglaise avec GPT', tag: 'MUST DO' },
       { id: 'life_youtube', pillar: 'LIFE', category: 'BUSINESS', title: 'Création / Montage vidéo YouTube Faceless', tag: 'SHOULD DO' },
@@ -540,13 +664,12 @@
     let currentDate = new Date();
     let currentCategoryFilter = 'ALL';
     let appData = JSON.parse(localStorage.getItem('PMG_LEVELING_DATA')) || {};
+    let radarChartInstance = null;
 
-    // REALTIME CLOCK & PROGRAM PROGRESS
     function updateClock() {
       const now = new Date();
       document.getElementById('clock').innerText = now.toLocaleTimeString('fr-FR');
 
-      // Program range: Sept 1, 2026 to Mar 31, 2027
       const startDate = new Date('2026-09-01T00:00:00');
       const endDate = new Date('2027-03-31T23:59:59');
       
@@ -584,7 +707,7 @@
       document.getElementById('page-' + pageId).classList.add('active');
       btn.classList.add('active');
 
-      if (pageId === 'progress') renderHistory();
+      if (pageId === 'radar') renderRadar();
     }
 
     function filterCategory(cat, btn) {
@@ -660,7 +783,6 @@
         }
       });
 
-      // Update Scores
       const pct = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
       const deenPct = deenTotal > 0 ? Math.round((deenDone / deenTotal) * 100) : 0;
 
@@ -668,7 +790,6 @@
       document.getElementById('score-today').innerText = `${completedTasks}/${totalTasks}`;
       document.getElementById('deen-score').innerText = deenPct + '%';
 
-      // Calculate simple streak
       let streak = 0;
       let checkDate = new Date();
       while (true) {
@@ -685,29 +806,64 @@
       document.getElementById('streak-count').innerText = streak;
     }
 
-    function renderHistory() {
-      const historyContainer = document.getElementById('history-container');
-      historyContainer.innerHTML = '';
-
-      const keys = Object.keys(appData).sort().reverse();
-      if (keys.length === 0) {
-        historyContainer.innerHTML = '<p style="color:var(--text-muted); font-size:0.85rem;">Aucun historique pour le moment.</p>';
-        return;
-      }
+    function getCategoryCompletion(cat) {
+      const keys = Object.keys(appData);
+      if (keys.length === 0) return 60; // Valeur initiale par défaut
+      let catTasks = TASKS_TEMPLATE.filter(t => t.category === cat).map(t => t.id);
+      let total = 0;
+      let done = 0;
 
       keys.forEach(k => {
-        const dayObj = appData[k];
-        const doneCount = Object.values(dayObj).filter(Boolean).length;
-        const total = TASKS_TEMPLATE.length;
-        const pct = Math.round((doneCount / total) * 100);
+        catTasks.forEach(tid => {
+          total++;
+          if (appData[k][tid]) done++;
+        });
+      });
 
-        const div = document.createElement('div');
-        div.className = 'history-item';
-        div.innerHTML = `
-          <span>${k}</span>
-          <span style="color: var(--gold-primary); font-weight: bold;">${pct}% (${doneCount}/${total})</span>
-        `;
-        historyContainer.appendChild(div);
+      return total > 0 ? Math.round((done / total) * 100) : 60;
+    }
+
+    function renderRadar() {
+      const ctx = document.getElementById('radarChart').getContext('2d');
+      if (radarChartInstance) radarChartInstance.destroy();
+
+      const scores = [
+        getCategoryCompletion('DEEN'),
+        getCategoryCompletion('CHARACTER'),
+        getCategoryCompletion('STUDIES'),
+        getCategoryCompletion('BUSINESS'),
+        getCategoryCompletion('FITNESS'),
+        getCategoryCompletion('ENGLISH')
+      ];
+
+      radarChartInstance = new Chart(ctx, {
+        type: 'radar',
+        data: {
+          labels: ['DEEN', 'CHARACTER', 'STUDIES', 'BUSINESS', 'FITNESS', 'ENGLISH'],
+          datasets: [{
+            label: 'Niveau d\'Exécution (%)',
+            data: scores,
+            backgroundColor: 'rgba(212, 175, 55, 0.2)',
+            borderColor: '#d4af37',
+            pointBackgroundColor: '#f3e5ab',
+            pointBorderColor: '#d4af37'
+          }]
+        },
+        options: {
+          scales: {
+            r: {
+              angleLines: { color: '#232733' },
+              grid: { color: '#232733' },
+              pointLabels: { color: '#f0f2f5', font: { size: 11, weight: 'bold' } },
+              ticks: { display: false, backdropColor: 'transparent' },
+              suggestedMin: 0,
+              suggestedMax: 100
+            }
+          },
+          plugins: {
+            legend: { display: false }
+          }
+        }
       });
     }
 
@@ -737,7 +893,6 @@
       fileReader.readAsText(event.target.files[0]);
     }
 
-    // INITIAL RENDER
     renderChecklist();
   </script>
 </body>
