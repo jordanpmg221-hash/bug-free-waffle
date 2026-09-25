@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -144,10 +145,10 @@
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      font-size: 0.6rem;
+      font-size: 0.58rem;
       font-weight: 600;
       cursor: pointer;
-      width: 16%;
+      width: 14%;
     }
 
     .nav-btn.active {
@@ -410,6 +411,49 @@
       text-transform: uppercase;
     }
 
+    /* BADGES GRID */
+    .badges-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+
+    .badge-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-md);
+      padding: 12px;
+      text-align: center;
+      opacity: 0.4;
+      filter: grayscale(1);
+      transition: all 0.3s ease;
+    }
+
+    .badge-card.unlocked {
+      opacity: 1;
+      filter: grayscale(0);
+      border-color: var(--gold-primary);
+      background: var(--gold-glow);
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+    }
+
+    .badge-icon {
+      font-size: 2rem;
+      margin-bottom: 6px;
+    }
+
+    .badge-title {
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--gold-light);
+    }
+
+    .badge-desc {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
     .page-section {
       display: none;
     }
@@ -592,7 +636,15 @@
       </div>
     </div>
 
-    <!-- PAGE 3: RADAR & METRICS -->
+    <!-- PAGE 3: BADGES & TROPHÉES (NOUVEAU) -->
+    <div id="page-badges" class="page-section">
+      <div class="card">
+        <div class="card-title">TROPHÉES & BADGES</div>
+        <div class="badges-grid" id="badges-container"></div>
+      </div>
+    </div>
+
+    <!-- PAGE 4: RADAR & METRICS -->
     <div id="page-radar" class="page-section">
       <div class="card">
         <div class="card-title">PMG LEVELING RADAR</div>
@@ -600,7 +652,7 @@
       </div>
     </div>
 
-    <!-- PAGE 4: CHAPTERS -->
+    <!-- PAGE 5: CHAPTERS -->
     <div id="page-chapters" class="page-section">
       <div class="card">
         <div class="card-title">CHAPITRES DU PROGRAMME</div>
@@ -649,7 +701,7 @@
       </div>
     </div>
 
-    <!-- PAGE 5: BIG MISSIONS -->
+    <!-- PAGE 6: BIG MISSIONS -->
     <div id="page-missions" class="page-section">
       <div class="card">
         <div class="card-title">THE BIG MISSIONS</div>
@@ -663,7 +715,7 @@
       </div>
     </div>
 
-    <!-- PAGE 6: SETTINGS -->
+    <!-- PAGE 7: SETTINGS -->
     <div id="page-settings" class="page-section">
       <div class="card">
         <div class="card-title">Sauvegarde & Données</div>
@@ -684,6 +736,10 @@
     <button class="nav-btn" onclick="switchPage('weekly', this)">
       <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
       Hebdo
+    </button>
+    <button class="nav-btn" onclick="switchPage('badges', this)">
+      <svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+      Badges
     </button>
     <button class="nav-btn" onclick="switchPage('radar', this)">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
@@ -722,6 +778,15 @@
       { id: 'life_youtube', pillar: 'LIFE', category: 'BUSINESS', title: 'Création / Montage vidéo YouTube Faceless', tag: 'SHOULD DO' },
       { id: 'life_fitness', pillar: 'LIFE', category: 'FITNESS', title: 'Renforcement musculaire / Pompes', tag: 'SHOULD DO' },
       { id: 'life_money', pillar: 'LIFE', category: 'MONEY', title: 'Noter mes dépenses du jour', tag: 'SHOULD DO' }
+    ];
+
+    const BADGES_TEMPLATE = [
+      { id: 'fajr_7', title: 'Fajr Warrior', desc: '7 jours consécutifs au Fajr', icon: '🕌', taskId: 'deen_fajr', reqCount: 7 },
+      { id: 'finance_10', title: 'Finance Master', desc: '10 sessions de L3 Finance', icon: '📈', taskId: 'life_studies', reqCount: 10 },
+      { id: 'control_10', title: 'Self-Control King', desc: '10 jours de Maîtrise de soi', icon: '🛡️', taskId: 'char_matrise', reqCount: 10 },
+      { id: 'english_14', title: 'English Fluent', desc: '14 jours de pratique Anglais', icon: '🗣️', taskId: 'life_english', reqCount: 14 },
+      { id: 'youtube_10', title: 'Faceless Creator', desc: '10 sessions YouTube créées', icon: '🎬', taskId: 'life_youtube', reqCount: 10 },
+      { id: 'streak_14', title: 'Streak Master', desc: 'Série de 14 jours consécutifs', icon: '⚡', isStreak: true, reqCount: 14 }
     ];
 
     let currentDate = new Date();
@@ -782,6 +847,7 @@
 
       if (pageId === 'radar') renderRadar();
       if (pageId === 'weekly') renderWeekly();
+      if (pageId === 'badges') renderBadges();
     }
 
     function filterCategory(cat, btn) {
@@ -826,6 +892,54 @@
       document.getElementById('weekly-wins').value = wData.wins || '';
       document.getElementById('weekly-lessons').value = wData.lessons || '';
       document.getElementById('weekly-rating').value = wData.rating || '10';
+    }
+
+    function countTaskOccurrences(taskId) {
+      let count = 0;
+      Object.values(appData).forEach(day => {
+        if (day[taskId]) count++;
+      });
+      return count;
+    }
+
+    function getStreakCount() {
+      let streak = 0;
+      let checkDate = new Date();
+      while (true) {
+        let k = getDateKey(checkDate);
+        let d = appData[k] || {};
+        let done = Object.values(d).filter(Boolean).length;
+        if (done > 0) {
+          streak++;
+          checkDate.setDate(checkDate.getDate() - 1);
+        } else {
+          break;
+        }
+      }
+      return streak;
+    }
+
+    function renderBadges() {
+      const container = document.getElementById('badges-container');
+      container.innerHTML = '';
+
+      BADGES_TEMPLATE.forEach(badge => {
+        let isUnlocked = false;
+        if (badge.isStreak) {
+          isUnlocked = getStreakCount() >= badge.reqCount;
+        } else {
+          isUnlocked = countTaskOccurrences(badge.taskId) >= badge.reqCount;
+        }
+
+        const card = document.createElement('div');
+        card.className = `badge-card ${isUnlocked ? 'unlocked' : ''}`;
+        card.innerHTML = `
+          <div class="badge-icon">${badge.icon}</div>
+          <div class="badge-title">${badge.title}</div>
+          <div class="badge-desc">${badge.desc}</div>
+        `;
+        container.appendChild(card);
+      });
     }
 
     function renderChecklist() {
@@ -900,20 +1014,7 @@
       let level = Math.floor(totalCompletedAllTime / 10) + 1;
       document.getElementById('user-level').innerText = `Lvl ${level}`;
 
-      let streak = 0;
-      let checkDate = new Date();
-      while (true) {
-        let k = getDateKey(checkDate);
-        let d = appData[k] || {};
-        let done = Object.values(d).filter(Boolean).length;
-        if (done > 0) {
-          streak++;
-          checkDate.setDate(checkDate.getDate() - 1);
-        } else {
-          break;
-        }
-      }
-      document.getElementById('streak-count').innerText = streak;
+      document.getElementById('streak-count').innerText = getStreakCount();
     }
 
     function startTimer(minutes) {
@@ -1045,9 +1146,3 @@
   </script>
 </body>
 </html>
-const BADGES_TEMPLATE = [
-  { id: 'fajr_7', title: 'Fajr Warrior', desc: '7 jours de Fajr d\'affilée', icon: '🕌', check: (data) => checkConsecutiveTask('deen_fajr', 7) },
-  { id: 'l3_10h', title: 'Finance Master', desc: '10 sessions de L3 Finance', icon: '📈', check: (data) => countTaskTotal('life_studies') >= 10 },
-  { id: 'matrise_10', title: 'Self-Control King', desc: '10 jours de Maîtrise de soi', icon: '🛡️', check: (data) => countTaskTotal('char_matrise') >= 10 },
-  { id: 'streak_14', title: 'Streak Master', desc: '14 jours de série consécutifs', icon: '⚡', check: (data) => getStreak() >= 14 }
-];
