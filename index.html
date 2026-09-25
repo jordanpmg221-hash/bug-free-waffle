@@ -461,7 +461,7 @@
     <div id="page-missions" class="page-section">
       <div class="card">
         <div class="card-title">THE BIG MISSIONS</div>
-        <div class="mission-item"><span style="color:var(--gold-primary);">1.</span><div><strong>DEEN FIRST :</strong> Assiduité totale au Fajr à la mosquée et mémorisation/révision du Coran.</div></div>
+        <div class="mission-item"><span style="color:var(--gold-primary);">1.</span><div><strong>DEEN FIRST :</strong> Assiduité totale au Fajr et mémorisation/révision du Coran.</div></div>
         <div class="mission-item"><span style="color:var(--gold-primary);">2.</span><div><strong>L3 FINANCE :</strong> Valider l'année universitaire de Licence 3 avec Mention.</div></div>
         <div class="mission-item"><span style="color:var(--gold-primary);">3.</span><div><strong>YOUTUBE FACELESS :</strong> Atteindre les seuils de monétisation (1 000 subs / 4 000 h).</div></div>
         <div class="mission-item"><span style="color:var(--gold-primary);">4.</span><div><strong>ENGLISH FLUENCY :</strong> Parler anglais couramment grâce aux 15 min de pratique GPT quotidienne.</div></div>
@@ -526,7 +526,7 @@
       Missions
     </button>
     <button class="nav-btn" onclick="switchPage('settings', this)">
-      <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6-3.6z"/></svg>
+      <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
       Réglages
     </button>
   </nav>
@@ -541,12 +541,13 @@
     ];
 
     const TASKS_TEMPLATE = [
-      { id: 'deen_fajr', pillar: 'DEEN', category: 'DEEN', title: 'Fajr à la mosquée à l\'heure', tag: 'MUST DO' },
+      { id: 'deen_fajr', pillar: 'DEEN', category: 'DEEN', title: 'Prier Fajr', tag: 'MUST DO' },
+      { id: 'deen_zikr', pillar: 'DEEN', category: 'DEEN', title: '3 min de Zikr après chaque prière', tag: 'MUST DO' },
       { id: 'deen_istighfar', pillar: 'DEEN', category: 'DEEN', title: '1 000 Istighfar quotidien', tag: 'MUST DO' },
       { id: 'deen_coran', pillar: 'DEEN', category: 'DEEN', title: 'Coran : 3-5 versets mémorisés / révision', tag: 'MUST DO' },
-      { id: 'deen_sadaqah', pillar: 'DEEN', category: 'DEEN', title: 'Aumône quotidienne (Sadaqah)', tag: 'MUST DO' },
-      { id: 'deen_adhkar', pillar: 'DEEN', category: 'DEEN', title: 'Adhkar du matin & du soir', tag: 'SHOULD DO' },
-      { id: 'deen_sunnah', pillar: 'DEEN', category: 'DEEN', title: 'Prières surérogatoires (Sunnah)', tag: 'SHOULD DO' },
+      { id: 'deen_sadaqah', pillar: 'DEEN', category: 'DEEN', title: 'Aumône quotidienne (Sadaqah)', tag: 'SHOULD DO' },
+      { id: 'deen_duha', pillar: 'DEEN', category: 'DEEN', title: 'Prière de Duha (2 Rak\'at le matin)', tag: 'SHOULD DO' },
+      { id: 'deen_tafsir', pillar: 'DEEN', category: 'DEEN', title: '1 verset du Coran avec compréhension / Tafsir', tag: 'SHOULD DO' },
 
       { id: 'char_matrise', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Maîtrise de soi', tag: 'MUST DO' },
       { id: 'char_lecture', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Lecture (Développement personnel / Savoir)', tag: 'MUST DO' },
@@ -556,6 +557,7 @@
       { id: 'life_studies', pillar: 'LIFE', category: 'STUDIES', title: '2h de travail profond L3 Finance (Active recall / ex)', tag: 'MUST DO' },
       { id: 'life_english', pillar: 'LIFE', category: 'ENGLISH', title: '15 min de conversation anglaise avec GPT', tag: 'MUST DO' },
       { id: 'life_youtube', pillar: 'LIFE', category: 'BUSINESS', title: 'Création / Montage vidéo YouTube Faceless', tag: 'SHOULD DO' },
+      { id: 'life_skill', pillar: 'LIFE', category: 'BUSINESS', title: 'Apprendre une compétence (Hard Skill)', tag: 'SHOULD DO' },
       { id: 'life_fitness', pillar: 'LIFE', category: 'FITNESS', title: 'Renforcement musculaire / Pompes', tag: 'SHOULD DO' },
       { id: 'life_money', pillar: 'LIFE', category: 'MONEY', title: 'Noter mes dépenses du jour', tag: 'SHOULD DO' }
     ];
@@ -749,15 +751,12 @@
       document.getElementById('date-display').innerText = formatDateDisplay(currentDate);
       document.getElementById('daily-note').value = notesData[dateKey] || '';
 
-      // Citation aléatoire selon la date
       const qIdx = Math.abs(dateKey.split('').reduce((a,b)=>a+b.charCodeAt(0),0)) % QUOTES.length;
       document.getElementById('daily-quote').innerText = QUOTES[qIdx];
 
-      // Total dépenses jour
       const dayExp = expensesData[dateKey] || 0;
       document.getElementById('daily-expenses-total').innerText = `Total aujourd'hui: ${dayExp} FCFA`;
 
-      // État Ramadan Mode toggle
       document.getElementById('ramadan-mode-toggle').checked = isRamadanMode;
 
       const container = document.getElementById('checklist-container');
