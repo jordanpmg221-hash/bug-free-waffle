@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -144,10 +145,10 @@
       flex-direction: column;
       align-items: center;
       gap: 4px;
-      font-size: 0.65rem;
+      font-size: 0.6rem;
       font-weight: 600;
       cursor: pointer;
-      width: 20%;
+      width: 16%;
     }
 
     .nav-btn.active {
@@ -155,8 +156,8 @@
     }
 
     .nav-btn svg {
-      width: 20px;
-      height: 20px;
+      width: 18px;
+      height: 18px;
       fill: currentColor;
     }
 
@@ -185,29 +186,44 @@
     /* SCORE DASHBOARD */
     .score-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
       text-align: center;
     }
 
     .score-box {
       background: rgba(255, 255, 255, 0.03);
-      padding: 12px 8px;
+      padding: 10px 6px;
       border-radius: var(--radius-md);
       border: 1px solid var(--card-border);
     }
 
     .score-value {
-      font-size: 1.4rem;
+      font-size: 1.1rem;
       font-weight: 800;
       color: var(--gold-light);
     }
 
     .score-label {
-      font-size: 0.68rem;
+      font-size: 0.62rem;
       color: var(--text-muted);
       text-transform: uppercase;
       margin-top: 2px;
+    }
+
+    /* TIMER CARD */
+    .timer-display {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--gold-primary);
+      text-align: center;
+      margin: 10px 0;
+      font-family: monospace;
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 8px;
     }
 
     /* DATE NAVIGATOR */
@@ -364,41 +380,35 @@
       font-weight: 700;
     }
 
-    /* CHAPTERS & MISSIONS */
-    .chapter-card {
-      background: rgba(255, 255, 255, 0.02);
+    /* FORMS & TEXTAREA */
+    textarea, input[type="text"], input[type="number"], select {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
       border-radius: var(--radius-md);
-      padding: 14px;
+      color: var(--text-main);
+      padding: 10px;
+      font-family: inherit;
+      font-size: 0.85rem;
+      margin-top: 6px;
       margin-bottom: 12px;
     }
 
-    .chapter-title {
-      font-weight: 800;
-      font-size: 0.85rem;
-      color: var(--gold-primary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+    textarea {
+      height: 70px;
+      resize: none;
     }
 
-    .chapter-subtitle {
+    textarea:focus, input:focus, select:focus {
+      outline: none;
+      border-color: var(--gold-primary);
+    }
+
+    label {
       font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-      margin-bottom: 8px;
-    }
-
-    .mission-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.8rem;
-      padding: 8px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .mission-item:last-child {
-      border-bottom: none;
+      color: var(--gold-light);
+      font-weight: 600;
+      text-transform: uppercase;
     }
 
     .page-section {
@@ -415,9 +425,9 @@
       color: #0b0c10;
       border: none;
       border-radius: var(--radius-md);
-      padding: 12px;
+      padding: 10px;
       font-weight: 700;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       cursor: pointer;
       margin-top: 10px;
     }
@@ -426,14 +436,6 @@
       background: rgba(255, 255, 255, 0.08);
       color: var(--text-main);
       border: 1px solid var(--card-border);
-    }
-
-    .history-item {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px;
-      border-bottom: 1px solid var(--card-border);
-      font-size: 0.85rem;
     }
 
     #radarChart {
@@ -465,11 +467,11 @@
   <!-- MAIN CONTAINER -->
   <div class="container">
 
-    <!-- PAGE 1: TODAY (CHECKLIST & HOME) -->
+    <!-- PAGE 1: TODAY -->
     <div id="page-today" class="page-section active">
       <div class="card">
         <div class="card-title">
-          <span>Aujourd'hui</span>
+          <span>Tableau de Bord</span>
           <span id="completion-text" style="color: var(--gold-light);">0%</span>
         </div>
         <div class="score-grid">
@@ -479,12 +481,27 @@
           </div>
           <div class="score-box">
             <div class="score-value" id="streak-count">0</div>
-            <div class="score-label">Série (Jours)</div>
+            <div class="score-label">Série (J)</div>
+          </div>
+          <div class="score-box">
+            <div class="score-value" id="user-level">Lvl 1</div>
+            <div class="score-label">Niveau</div>
           </div>
           <div class="score-box">
             <div class="score-value" id="deen-score">0%</div>
-            <div class="score-label">Deen Score</div>
+            <div class="score-label">Deen</div>
           </div>
+        </div>
+      </div>
+
+      <!-- TIMER POMODORO -->
+      <div class="card">
+        <div class="card-title">Minuteur de Concentration</div>
+        <div class="timer-display" id="timer-display">02:00:00</div>
+        <div class="timer-controls">
+          <button class="btn" onclick="startTimer(120)">2h L3 Finance</button>
+          <button class="btn btn-secondary" onclick="startTimer(15)">15m English</button>
+          <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
         </div>
       </div>
 
@@ -504,9 +521,43 @@
       </div>
 
       <div id="checklist-container"></div>
+
+      <div class="card" style="margin-top: 16px;">
+        <div class="card-title">Journal du Soir</div>
+        <textarea id="daily-note" placeholder="Notes du jour, réflexions, gratitudes..." oninput="saveNote()"></textarea>
+      </div>
     </div>
 
-    <!-- PAGE 2: RADAR & METRICS (PHASE 2) -->
+    <!-- PAGE 2: BILAN HEBDOMADAIRE (NOUVEAU) -->
+    <div id="page-weekly" class="page-section">
+      <div class="card">
+        <div class="card-title">
+          <span>Bilan Hebdomadaire</span>
+          <span id="weekly-number" style="color:var(--gold-light);">Semaine 1</span>
+        </div>
+
+        <label for="weekly-expenses">1. Total Dépenses de la Semaine (FCFA / €)</label>
+        <input type="number" id="weekly-expenses" placeholder="ex: 25000" oninput="saveWeeklyData()">
+
+        <label for="weekly-wins">2. Victoires & Réalisations Clés (*Wins*)</label>
+        <textarea id="weekly-wins" placeholder="Ex: 5 vidéos publiées, 100% de présence au Fajr, 14h d'études L3..." oninput="saveWeeklyData()"></textarea>
+
+        <label for="weekly-lessons">3. Leçons & Distractions à Éliminer</label>
+        <textarea id="weekly-lessons" placeholder="Ex: Procrastination le mardi soir sur le téléphone, fatigue..." oninput="saveWeeklyData()"></textarea>
+
+        <label for="weekly-rating">4. Note de Discipline de la Semaine (/10)</label>
+        <select id="weekly-rating" onchange="saveWeeklyData()">
+          <option value="10">10/10 — Maîtrise Totale</option>
+          <option value="9">9/10 — Excellent</option>
+          <option value="8">8/10 — Très Bon</option>
+          <option value="7">7/10 — Bon</option>
+          <option value="6">6/10 — Moyen</option>
+          <option value="5">5/10 — À corriger</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- PAGE 3: RADAR & METRICS -->
     <div id="page-radar" class="page-section">
       <div class="card">
         <div class="card-title">PMG LEVELING RADAR</div>
@@ -514,7 +565,7 @@
       </div>
     </div>
 
-    <!-- PAGE 3: CHAPTERS (PHASE 2) -->
+    <!-- PAGE 4: CHAPTERS -->
     <div id="page-chapters" class="page-section">
       <div class="card">
         <div class="card-title">CHAPITRES DU PROGRAMME</div>
@@ -522,7 +573,7 @@
         <div class="chapter-card">
           <div class="chapter-title">CHAPTER 01 — SEPTEMBER</div>
           <div class="chapter-subtitle">Foundation & Anchor</div>
-          <p style="font-size:0.75rem; color:var(--text-muted);">Mise en place du rythme d'études L2 et ancrage spirituel.</p>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Mise en place du rythme d'études L3 et ancrage spirituel.</p>
         </div>
 
         <div class="chapter-card">
@@ -534,7 +585,7 @@
         <div class="chapter-card">
           <div class="chapter-title">CHAPTER 03 — NOVEMBER</div>
           <div class="chapter-subtitle">Mid-Term Peak & Consistency</div>
-          <p style="font-size:0.75rem; color:var(--text-muted);">Préparation intensive des partiels de mi-semestre L2 Finance.</p>
+          <p style="font-size:0.75rem; color:var(--text-muted);">Préparation intensive des partiels de mi-semestre L3 Finance.</p>
         </div>
 
         <div class="chapter-card">
@@ -558,57 +609,29 @@
         <div class="chapter-card" style="border-color: var(--gold-primary);">
           <div class="chapter-title">CHAPTER 07 — MARCH (RAMADAN)</div>
           <div class="chapter-subtitle">Spiritual Apex & Graduation</div>
-          <p style="font-size:0.75rem; color:var(--gold-light);">Adoration maximale, validation de la L2 avec Mention et Level Up final.</p>
+          <p style="font-size:0.75rem; color:var(--gold-light);">Adoration maximale, validation de la L3 avec Mention et Level Up final.</p>
         </div>
-
       </div>
     </div>
 
-    <!-- PAGE 4: BIG MISSIONS (PHASE 2) -->
+    <!-- PAGE 5: BIG MISSIONS -->
     <div id="page-missions" class="page-section">
       <div class="card">
         <div class="card-title">THE BIG MISSIONS</div>
         
-        <div class="mission-item">
-          <span style="color:var(--gold-primary);">1.</span>
-          <div><strong>DEEN FIRST :</strong> Assiduité totale au Fajr à la mosquée et mémorisation/révision du Coran.</div>
-        </div>
-
-        <div class="mission-item">
-          <span style="color:var(--gold-primary);">2.</span>
-          <div><strong>L2 FINANCE :</strong> Valider l'année universitaire de Licence 2 avec Mention.</div>
-        </div>
-
-        <div class="mission-item">
-          <span style="color:var(--gold-primary);">3.</span>
-          <div><strong>YOUTUBE FACELESS :</strong> Atteindre les seuils de monétisation (1 000 subs / 4 000 h).</div>
-        </div>
-
-        <div class="mission-item">
-          <span style="color:var(--gold-primary);">4.</span>
-          <div><strong>ENGLISH FLUENCY :</strong> Parler anglais couramment grâce aux 15 min de pratique GPT quotidienne.</div>
-        </div>
-
-        <div class="mission-item">
-          <span style="color:var(--gold-primary);">5.</span>
-          <div><strong>DISCIPLINE :</strong> Éliminer la procrastination initiale au lancement des blocs de travail.</div>
-        </div>
-
-        <div class="mission-item">
-          <span style="color:var(--gold-primary);">6.</span>
-          <div><strong>MAÎTRISE FINANCIÈRE :</strong> Suivi strict des dépenses et constitution d'une épargne.</div>
-        </div>
-
+        <div class="mission-item"><span style="color:var(--gold-primary);">1.</span><div><strong>DEEN FIRST :</strong> Assiduité totale au Fajr à la mosquée et mémorisation/révision du Coran.</div></div>
+        <div class="mission-item"><span style="color:var(--gold-primary);">2.</span><div><strong>L3 FINANCE :</strong> Valider l'année universitaire de Licence 3 avec Mention.</div></div>
+        <div class="mission-item"><span style="color:var(--gold-primary);">3.</span><div><strong>YOUTUBE FACELESS :</strong> Atteindre les seuils de monétisation (1 000 subs / 4 000 h).</div></div>
+        <div class="mission-item"><span style="color:var(--gold-primary);">4.</span><div><strong>ENGLISH FLUENCY :</strong> Parler anglais couramment grâce aux 15 min de pratique GPT quotidienne.</div></div>
+        <div class="mission-item"><span style="color:var(--gold-primary);">5.</span><div><strong>DISCIPLINE :</strong> Éliminer la procrastination initiale au lancement des blocs de travail.</div></div>
+        <div class="mission-item"><span style="color:var(--gold-primary);">6.</span><div><strong>MAÎTRISE FINANCIÈRE :</strong> Suivi strict des dépenses et constitution d'une épargne.</div></div>
       </div>
     </div>
 
-    <!-- PAGE 5: SETTINGS & DATA -->
+    <!-- PAGE 6: SETTINGS -->
     <div id="page-settings" class="page-section">
       <div class="card">
         <div class="card-title">Sauvegarde & Données</div>
-        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
-          Tes données restent enregistrées localement dans ton navigateur. Exporte une sauvegarde de sécurité à tout moment.
-        </p>
         <button class="btn" onclick="exportData()">Exporter les données (JSON)</button>
         <button class="btn btn-secondary" onclick="document.getElementById('import-file').click()">Importer un fichier JSON</button>
         <input type="file" id="import-file" style="display: none;" onchange="importData(event)">
@@ -622,6 +645,10 @@
     <button class="nav-btn active" onclick="switchPage('today', this)">
       <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14zM17 8.4l-1.41-1.41L11 12.17l-2.59-2.58L7 11l4 4 6-6z"/></svg>
       Today
+    </button>
+    <button class="nav-btn" onclick="switchPage('weekly', this)">
+      <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg>
+      Hebdo
     </button>
     <button class="nav-btn" onclick="switchPage('radar', this)">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
@@ -650,11 +677,12 @@
       { id: 'deen_adhkar', pillar: 'DEEN', category: 'DEEN', title: 'Adhkar du matin & du soir', tag: 'SHOULD DO' },
       { id: 'deen_sunnah', pillar: 'DEEN', category: 'DEEN', title: 'Prières surérogatoires (Sunnah)', tag: 'SHOULD DO' },
 
+      { id: 'char_matrise', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Maîtrise de soi', tag: 'MUST DO' },
       { id: 'char_gratitude', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Pratiquer la gratitude', tag: 'MUST DO' },
       { id: 'char_focus', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Lancement immédiat du travail sans distraction', tag: 'MUST DO' },
       { id: 'char_bilan', pillar: 'CHARACTER', category: 'CHARACTER', title: 'Bilan du soir de 3 minutes', tag: 'SHOULD DO' },
 
-      { id: 'life_studies', pillar: 'LIFE', category: 'STUDIES', title: '2h de travail profond L2 Finance (Active recall / ex)', tag: 'MUST DO' },
+      { id: 'life_studies', pillar: 'LIFE', category: 'STUDIES', title: '2h de travail profond L3 Finance (Active recall / ex)', tag: 'MUST DO' },
       { id: 'life_english', pillar: 'LIFE', category: 'ENGLISH', title: '15 min de conversation anglaise avec GPT', tag: 'MUST DO' },
       { id: 'life_youtube', pillar: 'LIFE', category: 'BUSINESS', title: 'Création / Montage vidéo YouTube Faceless', tag: 'SHOULD DO' },
       { id: 'life_fitness', pillar: 'LIFE', category: 'FITNESS', title: 'Renforcement musculaire / Pompes', tag: 'SHOULD DO' },
@@ -664,7 +692,10 @@
     let currentDate = new Date();
     let currentCategoryFilter = 'ALL';
     let appData = JSON.parse(localStorage.getItem('PMG_LEVELING_DATA')) || {};
+    let notesData = JSON.parse(localStorage.getItem('PMG_LEVELING_NOTES')) || {};
+    let weeklyData = JSON.parse(localStorage.getItem('PMG_LEVELING_WEEKLY')) || {};
     let radarChartInstance = null;
+    let timerInterval = null;
 
     function updateClock() {
       const now = new Date();
@@ -685,8 +716,15 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    function getDateKey(d) {
-      return d.toISOString().split('T')[0];
+    function getDateKey(d) { return d.toISOString().split('T')[0]; }
+
+    function getWeekKey(d) {
+      const date = new Date(d.getTime());
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+      const week1 = new Date(date.getFullYear(), 0, 4);
+      const weekNum = 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+      return `W${weekNum}-${date.getFullYear()}`;
     }
 
     function formatDateDisplay(d) {
@@ -708,6 +746,7 @@
       btn.classList.add('active');
 
       if (pageId === 'radar') renderRadar();
+      if (pageId === 'weekly') renderWeekly();
     }
 
     function filterCategory(cat, btn) {
@@ -726,10 +765,39 @@
       renderChecklist();
     }
 
+    function saveNote() {
+      const dateKey = getDateKey(currentDate);
+      notesData[dateKey] = document.getElementById('daily-note').value;
+      localStorage.setItem('PMG_LEVELING_NOTES', JSON.stringify(notesData));
+    }
+
+    function saveWeeklyData() {
+      const weekKey = getWeekKey(currentDate);
+      weeklyData[weekKey] = {
+        expenses: document.getElementById('weekly-expenses').value,
+        wins: document.getElementById('weekly-wins').value,
+        lessons: document.getElementById('weekly-lessons').value,
+        rating: document.getElementById('weekly-rating').value
+      };
+      localStorage.setItem('PMG_LEVELING_WEEKLY', JSON.stringify(weeklyData));
+    }
+
+    function renderWeekly() {
+      const weekKey = getWeekKey(currentDate);
+      const wData = weeklyData[weekKey] || {};
+
+      document.getElementById('weekly-number').innerText = weekKey;
+      document.getElementById('weekly-expenses').value = wData.expenses || '';
+      document.getElementById('weekly-wins').value = wData.wins || '';
+      document.getElementById('weekly-lessons').value = wData.lessons || '';
+      document.getElementById('weekly-rating').value = wData.rating || '10';
+    }
+
     function renderChecklist() {
       const dateKey = getDateKey(currentDate);
       const dayData = appData[dateKey] || {};
       document.getElementById('date-display').innerText = formatDateDisplay(currentDate);
+      document.getElementById('daily-note').value = notesData[dateKey] || '';
 
       const container = document.getElementById('checklist-container');
       container.innerHTML = '';
@@ -790,6 +858,13 @@
       document.getElementById('score-today').innerText = `${completedTasks}/${totalTasks}`;
       document.getElementById('deen-score').innerText = deenPct + '%';
 
+      let totalCompletedAllTime = 0;
+      Object.values(appData).forEach(day => {
+        totalCompletedAllTime += Object.values(day).filter(Boolean).length;
+      });
+      let level = Math.floor(totalCompletedAllTime / 10) + 1;
+      document.getElementById('user-level').innerText = `Lvl ${level}`;
+
       let streak = 0;
       let checkDate = new Date();
       while (true) {
@@ -806,9 +881,34 @@
       document.getElementById('streak-count').innerText = streak;
     }
 
+    function startTimer(minutes) {
+      clearInterval(timerInterval);
+      let seconds = minutes * 60;
+      const display = document.getElementById('timer-display');
+
+      timerInterval = setInterval(() => {
+        let hrs = Math.floor(seconds / 3600);
+        let mins = Math.floor((seconds % 3600) / 60);
+        let secs = seconds % 60;
+
+        display.innerText = 
+          `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+
+        if (--seconds < 0) {
+          clearInterval(timerInterval);
+          alert("Temps écoulé ! Session de travail terminée.");
+        }
+      }, 1000);
+    }
+
+    function resetTimer() {
+      clearInterval(timerInterval);
+      document.getElementById('timer-display').innerText = "02:00:00";
+    }
+
     function getCategoryCompletion(cat) {
       const keys = Object.keys(appData);
-      if (keys.length === 0) return 60; // Valeur initiale par défaut
+      if (keys.length === 0) return 60;
       let catTasks = TASKS_TEMPLATE.filter(t => t.category === cat).map(t => t.id);
       let total = 0;
       let done = 0;
@@ -868,7 +968,12 @@
     }
 
     function exportData() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(appData));
+      const exportObject = {
+        appData: appData,
+        notesData: notesData,
+        weeklyData: weeklyData
+      };
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(exportObject));
       const downloadAnchor = document.createElement('a');
       downloadAnchor.setAttribute("href", dataStr);
       downloadAnchor.setAttribute("download", `PMG_LEVELING_BACKUP_${getDateKey(new Date())}.json`);
@@ -882,8 +987,16 @@
       fileReader.onload = function(e) {
         try {
           const imported = JSON.parse(e.target.result);
-          appData = imported;
+          if (imported.appData) {
+            appData = imported.appData;
+            notesData = imported.notesData || {};
+            weeklyData = imported.weeklyData || {};
+          } else {
+            appData = imported;
+          }
           localStorage.setItem('PMG_LEVELING_DATA', JSON.stringify(appData));
+          localStorage.setItem('PMG_LEVELING_NOTES', JSON.stringify(notesData));
+          localStorage.setItem('PMG_LEVELING_WEEKLY', JSON.stringify(weeklyData));
           renderChecklist();
           alert("Données importées avec succès !");
         } catch (err) {
